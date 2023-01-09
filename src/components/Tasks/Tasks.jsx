@@ -1,7 +1,7 @@
 import { useContext } from "react";
+import { TasksContext } from "../../context/TasksContext";
 import { TasksWrapper } from "./Tasks.styles";
 import Task from "../Task/Task";
-import { TasksContext } from "../../context/TasksContext";
 
 const Tasks = () => {
   const { tasks } = useContext(TasksContext);

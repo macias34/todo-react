@@ -24,14 +24,17 @@ const TasksContext = createContext();
 const TasksContextProvider = ({ children }) => {
   const [tasks, setTasks] = useState(todos);
 
+  const addTask = (task) => {
+    setTasks((currentTasks) => [...currentTasks, task]);
+  };
+
   const removeTask = (taskId) => {
     const filteredTasks = tasks.filter((task) => task.id !== taskId);
-    // console.log(filteredTasks);
     setTasks(filteredTasks);
   };
 
   return (
-    <TasksContext.Provider value={{ tasks, removeTask }}>
+    <TasksContext.Provider value={{ tasks, addTask, removeTask }}>
       {children}
     </TasksContext.Provider>
   );
