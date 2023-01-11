@@ -1,20 +1,47 @@
 import Button from "../Button/Button";
-import { TaskWrapper, Buttons, TaskText } from "./Task.styles";
+import { TaskWrapper, Buttons, TaskText, TextArea } from "./Task.styles";
 import { TasksContext } from "../../context/TasksContext";
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
+import { isEmpty } from "../../helpers/formValidation";
+import TextareaAutosize from "react-textarea-autosize";
 
 const Task = ({ children, id }) => {
-  const { removeTask } = useContext(TasksContext);
+  const { removeTask, editTask } = useContext(TasksContext);
+  const [editMode, setEditMode] = useState(false);
+  const editTextArea = useRef(null);
+
+  const toggleEditMode = () => {
+    setEditMode((currentEditMode) => !currentEditMode);
+
+    if (editMode) {
+      const content = editTextArea.current.value;
+      if (isEmpty(content)) return;
+
+      const editedTask = {
+        id,
+        content,
+      };
+      editTask(editedTask);
+    }
+  };
 
   return (
     <TaskWrapper>
-      <TaskText>{children}</TaskText>
+      {editMode ? (
+        <TextareaAutosize
+          autoFocus
+          defaultValue={children}
+          ref={editTextArea}
+          onBlur={toggleEditMode}
+          spellCheck="false"
+        ></TextareaAutosize>
+      ) : (
+        <TaskText onClick={toggleEditMode}>{children}</TaskText>
+      )}
+
       <Buttons>
-        <Button color={"#293241"}>
-          <i className="fa-regular fa-pen-to-square"></i>
-        </Button>
         <Button color={"#ee6c4d"} onClick={() => removeTask(id)}>
-          <i className="fa-solid fa-xmark"></i>
+          <i className="fa-solid fa-trash"></i>
         </Button>
       </Buttons>
     </TaskWrapper>

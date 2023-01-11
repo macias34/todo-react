@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 export const AddTaskWrapper = styled.div`
   margin: 3vh 0;
+  padding-right: 1.5vw;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   button {
     /* width: fit-content; */
@@ -12,7 +14,10 @@ export const AddTaskWrapper = styled.div`
 export const Input = styled.input`
   border: none;
   height: 5vh;
+  background-color: #408cbf;
   width: 80%;
   font-size: 1rem;
   padding: 0 0.5vw;
+  color: color;
+  outline: none;
 `;

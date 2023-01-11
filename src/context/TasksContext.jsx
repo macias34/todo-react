@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useMemo } from "react";
 
 const todos = [
   {
@@ -33,8 +33,19 @@ const TasksContextProvider = ({ children }) => {
     setTasks(filteredTasks);
   };
 
+  const editTask = (editedTask) => {
+    const taskToEdit = tasks.find((task) => task.id === editedTask.id);
+    taskToEdit.content = editedTask.content;
+
+    const filteredTasks = tasks.map((task) =>
+      task.id === editedTask.id ? (task = taskToEdit) : task
+    );
+
+    setTasks(filteredTasks);
+  };
+
   return (
-    <TasksContext.Provider value={{ tasks, addTask, removeTask }}>
+    <TasksContext.Provider value={{ tasks, addTask, removeTask, editTask }}>
       {children}
     </TasksContext.Provider>
   );
