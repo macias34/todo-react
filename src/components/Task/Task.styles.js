@@ -1,15 +1,24 @@
 import styled from "styled-components";
 
 export const TaskWrapper = styled.div`
-  background-color: #408cbf;
-  padding: 1.5vh 1.5vw;
+  background-color: #423a6f;
+  padding: 1vh 1vw;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 10px;
+  border-radius: 5px;
+
+  i {
+    cursor: pointer;
+    transition: 0.2s;
+    :hover {
+      color: red;
+    }
+  }
+
   textarea {
-    width: 90%;
+    width: 85%;
     word-break: break-all;
     resize: none;
     color: yellow;
@@ -25,14 +34,10 @@ export const TaskWrapper = styled.div`
 export const TaskText = styled.span`
   display: inline-flex;
   align-items: center;
-  width: 90%;
+  width: 85%;
   word-break: break-all;
-  height: calc(auto);
-`;
-
-export const Buttons = styled.div`
-  display: flex;
-  gap: 0.5vw;
+  height: auto;
+  cursor: pointer;
 `;
 
 export const TextArea = styled.textarea`

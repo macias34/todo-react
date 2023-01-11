@@ -3,19 +3,19 @@ import { createContext, useState, useMemo } from "react";
 const todos = [
   {
     id: 1,
-    content: "Szachy",
+    content: "Play chess",
   },
   {
     id: 2,
-    content: "Książka",
+    content: "Read book",
   },
   {
     id: 3,
-    content: "Umyć zęby",
+    content: "Brush teeth",
   },
   {
     id: 4,
-    content: "Trening",
+    content: "Work out",
   },
 ];
 

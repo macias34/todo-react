@@ -1,5 +1,4 @@
-import Button from "../Button/Button";
-import { TaskWrapper, Buttons, TaskText, TextArea } from "./Task.styles";
+import { TaskWrapper, TaskText } from "./Task.styles";
 import { TasksContext } from "../../context/TasksContext";
 import { useContext, useRef, useState } from "react";
 import { isEmpty } from "../../helpers/formValidation";
@@ -25,6 +24,12 @@ const Task = ({ children, id }) => {
     }
   };
 
+  const handleEnterSubmit = (event) => {
+    if (event.key === "Enter") {
+      toggleEditMode();
+    }
+  };
+
   return (
     <TaskWrapper>
       {editMode ? (
@@ -34,16 +39,13 @@ const Task = ({ children, id }) => {
           ref={editTextArea}
           onBlur={toggleEditMode}
           spellCheck="false"
+          onKeyDown={handleEnterSubmit}
         ></TextareaAutosize>
       ) : (
         <TaskText onClick={toggleEditMode}>{children}</TaskText>
       )}
 
-      <Buttons>
-        <Button color={"#ee6c4d"} onClick={() => removeTask(id)}>
-          <i className="fa-solid fa-trash"></i>
-        </Button>
-      </Buttons>
+      <i onClick={() => removeTask(id)} className="fa-solid fa-trash"></i>
     </TaskWrapper>
   );
 };

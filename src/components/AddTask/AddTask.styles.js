@@ -2,22 +2,20 @@ import styled from "styled-components";
 
 export const AddTaskWrapper = styled.div`
   margin: 3vh 0;
-  padding-right: 1.5vw;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  button {
-    /* width: fit-content; */
-  }
 `;
 
 export const Input = styled.input`
   border: none;
   height: 5vh;
-  background-color: #408cbf;
-  width: 80%;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 100%;
   font-size: 1rem;
-  padding: 0 0.5vw;
+  padding: 0 1vw;
   color: color;
   outline: none;
+  border-radius: 5px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 `;

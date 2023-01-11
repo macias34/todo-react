@@ -1,2 +1,2 @@
 # todo-react
-Beginner TODO React App made from scratch.
+Todo App made using React, using Context for managing state.

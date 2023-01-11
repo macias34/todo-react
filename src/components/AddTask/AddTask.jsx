@@ -19,12 +19,21 @@ const AddTask = () => {
     addTask(task);
     inputEl.current.value = "";
   };
+
+  const handleEnterSubmit = (event) => {
+    if (event.key === "Enter") {
+      addToTasks();
+    }
+  };
+
   return (
     <AddTaskWrapper>
-      <Input ref={inputEl} type="text"></Input>
-      <Button onClick={addToTasks} color={"#38E54D"}>
-        +
-      </Button>
+      <Input
+        ref={inputEl}
+        placeholder="Type task to add"
+        type="text"
+        onKeyDown={handleEnterSubmit}
+      ></Input>
     </AddTaskWrapper>
   );
 };
