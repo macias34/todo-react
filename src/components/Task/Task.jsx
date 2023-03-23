@@ -1,6 +1,6 @@
 import { TaskWrapper, TaskText } from "./Task.styles";
 import { TasksContext } from "../../context/TasksContext";
-import { useContext, useRef, useState } from "react";
+import { useCallback, useContext, useRef, useState, memo } from "react";
 import { isEmpty } from "../../helpers/formValidation";
 import TextareaAutosize from "react-textarea-autosize";
 
@@ -9,12 +9,13 @@ const Task = ({ children, id }) => {
   const [editMode, setEditMode] = useState(false);
   const editTextArea = useRef(null);
 
+  console.log("Rerender task.");
+
   const toggleEditMode = () => {
     setEditMode((currentEditMode) => !currentEditMode);
-
     if (editMode) {
       const content = editTextArea.current.value;
-      if (isEmpty(content)) return;
+      if (isEmpty(content) || content === children) return;
 
       const editedTask = {
         id,
@@ -24,11 +25,11 @@ const Task = ({ children, id }) => {
     }
   };
 
-  const handleEnterSubmit = (event) => {
+  const handleEnterSubmit = useCallback((event) => {
     if (event.key === "Enter") {
       toggleEditMode();
     }
-  };
+  });
 
   return (
     <TaskWrapper>
@@ -44,10 +45,9 @@ const Task = ({ children, id }) => {
       ) : (
         <TaskText onClick={toggleEditMode}>{children}</TaskText>
       )}
-
       <i onClick={() => removeTask(id)} className="fa-solid fa-trash"></i>
     </TaskWrapper>
   );
 };
 
-export default Task;
+export default memo(Task);

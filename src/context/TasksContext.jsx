@@ -1,4 +1,4 @@
-import { createContext, useState, useMemo } from "react";
+import { createContext, useState, memo, useCallback } from "react";
 
 const todos = [
   {
@@ -24,24 +24,23 @@ const TasksContext = createContext();
 const TasksContextProvider = ({ children }) => {
   const [tasks, setTasks] = useState(todos);
 
-  const addTask = (task) => {
+  const addTask = useCallback((task) => {
     setTasks((currentTasks) => [...currentTasks, task]);
-  };
+  }, []);
 
-  const removeTask = (taskId) => {
-    const filteredTasks = tasks.filter((task) => task.id !== taskId);
-    setTasks(filteredTasks);
-  };
+  const removeTask = useCallback((taskId) => {
+    setTasks((tasks) => tasks.filter((task) => task.id !== taskId));
+  }, []);
 
   const editTask = (editedTask) => {
     const taskToEdit = tasks.find((task) => task.id === editedTask.id);
     taskToEdit.content = editedTask.content;
 
-    const filteredTasks = tasks.map((task) =>
-      task.id === editedTask.id ? (task = taskToEdit) : task
+    setTasks((tasks) =>
+      tasks.map((task) =>
+        task.id === editedTask.id ? (task = taskToEdit) : task
+      )
     );
-
-    setTasks(filteredTasks);
   };
 
   return (

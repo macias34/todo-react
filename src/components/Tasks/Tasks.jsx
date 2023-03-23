@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 import { TasksContext } from "../../context/TasksContext";
 import { TasksWrapper } from "./Tasks.styles";
 import Task from "../Task/Task";
